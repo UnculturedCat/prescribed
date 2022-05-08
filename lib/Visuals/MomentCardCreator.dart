@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prescirbed/Utility/Moment.dart';
-import 'package:prescirbed/Utility/constants.dart';
+import 'package:prescribed/Utility/Moment.dart';
+import 'package:prescribed/Utility/constants.dart';
 
 class MomentCard extends StatefulWidget {
   final Moment? moment;
@@ -24,10 +24,12 @@ class _MomentCardState extends State<MomentCard> {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(medicine.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      )),
+                  Text(
+                    medicine.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   Text(
                     medicine.dosage,
                     style: TextStyle(fontSize: 12),

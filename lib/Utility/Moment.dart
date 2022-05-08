@@ -1,5 +1,5 @@
-import 'package:prescirbed/Utility/Medicine.dart';
-import 'package:prescirbed/Utility/constants.dart';
+import 'package:prescribed/Utility/Medicine.dart';
+import 'package:prescribed/Utility/constants.dart';
 
 import 'Medicine.dart';
 
@@ -28,53 +28,58 @@ class Moment {
 //this data should be fetched instead of manually created
 List<Moment> moments = [
   Moment(
-      name: MomentName.Ontbijt,
-      date: DateTime.parse("2019-01-07"),
-      medicines: [
-        Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
-        Medicine(name: "Acebutol", taken: false, dosage: "2 stuks, 40mg")
-      ]),
-  Moment(name: MomentName.Werk, date: DateTime.parse("2019-01-07"), medicines: [
-    Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
-    Medicine(name: "Acebutol", taken: false, dosage: "2 stuks, 40mg")
-  ]),
+    name: MomentName.Ontbijt,
+    date: DateTime.parse("2022-05-07"),
+    medicines: [
+      Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
+      Medicine(name: "Acebutol", taken: false, dosage: "2 stuks, 40mg")
+    ],
+  ),
+  Moment(
+    name: MomentName.Werk,
+    date: DateTime.parse("2022-05-07"),
+    medicines: [
+      Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
+      Medicine(name: "Acebutol", taken: false, dosage: "2 stuks, 40mg")
+    ],
+  ),
   Moment(
       name: MomentName.Lunch,
-      date: DateTime.parse("2019-01-07"),
+      date: DateTime.parse("2022-05-07"),
       medicines: [
         Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
         Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg")
       ]),
   Moment(
       name: MomentName.Ontbijt,
-      date: DateTime.parse("2019-01-08"),
+      date: DateTime.parse("2022-05-09"),
       medicines: [
         Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
         Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg")
       ]),
   Moment(
       name: MomentName.Ontbijt,
-      date: DateTime.parse("2019-01-09"),
+      date: DateTime.parse("2022-05-10"),
       medicines: [
         Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
         Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg")
       ]),
   Moment(
       name: MomentName.Lunch,
-      date: DateTime.parse("2019-01-09"),
+      date: DateTime.parse("2022-06-01"),
       medicines: [
         Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
         Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg")
       ]),
   Moment(
       name: MomentName.Slapen,
-      date: DateTime.parse("2019-01-09"),
+      date: DateTime.parse("2022-06-02"),
       medicines: [
         Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg"),
       ]),
   Moment(
       name: MomentName.Lunch,
-      date: DateTime.parse("2019-01-10"),
+      date: DateTime.parse("2022-06-03"),
       medicines: [
         Medicine(name: "Paracetamol", taken: false, dosage: "2 stuks, 40mg"),
         Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg")
