@@ -7,9 +7,11 @@ class AddPrescriptionPage extends StatefulWidget {
   State<AddPrescriptionPage> createState() => _AddPrescriptionPageState();
 }
 
-class _AddPrescriptionPageState extends State<AddPrescriptionPage> {
+class _AddPrescriptionPageState extends State<AddPrescriptionPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -67,4 +69,7 @@ class _AddPrescriptionPageState extends State<AddPrescriptionPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:prescribed/Utility/Moment.dart';
-import 'package:prescribed/Utility/constants.dart';
 import 'package:prescribed/Visuals/MomentCardCreator.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -12,7 +11,8 @@ class SchedulePage extends StatefulWidget {
   _SchedulePageState createState() => _SchedulePageState();
 }
 
-class _SchedulePageState extends State<SchedulePage> {
+class _SchedulePageState extends State<SchedulePage>
+    with AutomaticKeepAliveClientMixin {
   List<DateTime> days = [];
 
   DateTime? selectedDay = DateTime.now();
@@ -35,34 +35,32 @@ class _SchedulePageState extends State<SchedulePage> {
   }
 
   Widget createDayRow(DateTime date) {
-    bool createCards = false;
-    List<MomentCard> cards = [];
+    bool createdCards = false;
+    List<Moment> momentsToCreate = [];
+
+    MomentCard? card;
 
     if (moments.isNotEmpty) {
       moments.forEach((moment) {
         if (DateFormat.MMMMEEEEd().format(moment.date) ==
             DateFormat.MMMMEEEEd().format(date)) {
-          createCards = true;
-          cards.add(
-            MomentCard(
-              moment: moment,
-              key: Key(moment.date.toString() +
-                  convertMomentEnumToString(
-                    moment.name,
-                  )),
-            ),
-          );
+          createdCards = true;
+          momentsToCreate.add(moment);
 
           //only sort if there are multiple moments to be created
-          if (cards.length > 1)
-            cards.sort(
-              (a, b) => a.moment!.name.index.compareTo(b.moment!.name.index),
-            );
+          if (momentsToCreate.length > 1) {
+            momentsToCreate
+                .sort((a, b) => a.name.index.compareTo(b.name.index));
+          }
         }
       });
     }
 
-    return createCards
+    if (momentsToCreate.isNotEmpty) {
+      card = MomentCard(moments: momentsToCreate);
+    }
+
+    return createdCards
         ? Container(
             padding: EdgeInsets.only(top: 40, left: 20, right: 20),
             child: Column(
@@ -78,11 +76,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                Container(
-                  child: Column(
-                    children: cards,
-                  ),
-                ),
+                Container(child: card),
               ],
             ),
           )
@@ -103,6 +97,7 @@ class _SchedulePageState extends State<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -144,4 +139,7 @@ class _SchedulePageState extends State<SchedulePage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

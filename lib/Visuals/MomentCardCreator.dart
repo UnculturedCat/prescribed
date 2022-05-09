@@ -3,22 +3,55 @@ import 'package:prescribed/Utility/Moment.dart';
 import 'package:prescribed/Utility/constants.dart';
 
 class MomentCard extends StatefulWidget {
-  final Moment? moment;
+  final List<Moment>? moments;
 
-  const MomentCard({required this.moment, Key? key}) : super(key: key);
+  const MomentCard({required this.moments, Key? key}) : super(key: key);
   @override
-  _MomentCardState createState() => _MomentCardState(this.moment!.name);
+  _MomentCardState createState() => _MomentCardState();
 }
 
 class _MomentCardState extends State<MomentCard> {
-  MomentName name;
+  late MomentName name;
   bool showMedicines = false;
+  //late Widget currentlyDisplayedMedicines;
 
-  _MomentCardState(this.name);
+  late Moment selectedMoment;
 
-  Widget createMedicineView() {
+  _MomentCardState();
+
+  @override
+  void initState() {
+    super.initState();
+    //currentlyDisplayedMedicines = createMedicineView(widget.moment![0]);
+    selectedMoment = widget.moments![0];
+  }
+
+  Widget createMomentIcon(Moment moment) {
+    return CircleAvatar(
+      backgroundColor: Colors.white,
+      child: IconButton(
+        icon: Icon(
+          getIconFromMoment(moment.name),
+          color: moment == selectedMoment
+              ? Color.fromRGBO(26, 176, 96, 1.0)
+              : Colors.grey,
+        ),
+        color: /* selectedMoment.allMedicinesTaken ? Colors.white : Colors.black,*/ Colors
+            .white,
+        onPressed: () {
+          setState(
+            () {
+              selectedMoment = moment;
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget createMedicineView(Moment moment) {
     return Column(
-      children: widget.moment!.medicines
+      children: moment.medicines
           .map(
             (medicine) => ListTile(
               title: Column(
@@ -27,7 +60,7 @@ class _MomentCardState extends State<MomentCard> {
                   Text(
                     medicine.name,
                     style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Text(
@@ -42,7 +75,7 @@ class _MomentCardState extends State<MomentCard> {
                     medicine.taken
                         ? medicine.setToTaken(false)
                         : medicine.setToTaken(true);
-                    widget.moment!.checkIfAllAreTaken();
+                    moment.checkIfAllAreTaken();
                   });
                 },
                 icon: medicine.taken
@@ -62,81 +95,112 @@ class _MomentCardState extends State<MomentCard> {
   Widget build(BuildContext context) {
     return InkWell(
         child: Card(
+          elevation: 5,
+          color: Color.fromARGB(255, 242, 242, 242),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
-              Radius.circular(5),
+              Radius.circular(15),
             ),
           ),
           child: Column(
             children: [
               ClipRRect(
-                borderRadius: showMedicines
-                    ? BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5),
-                      )
-                    : BorderRadius.all(Radius.circular(5)),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
                 child: Container(
-                  color: widget.moment!.allMedicinesTaken
-                      ? Color.fromRGBO(82, 135, 143, 1)
-                      : Colors.white,
-                  child: ListTile(
-                    leading: Icon(
-                      getIconFromMoment(widget.moment!.name),
-                      color: widget.moment!.allMedicinesTaken
-                          ? Colors.white
-                          : Colors.black,
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            convertMomentEnumToString(widget.moment!.name),
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: widget.moment!.allMedicinesTaken
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ),
+                  // color: selectedMoment.allMedicinesTaken
+                  //     ? Color.fromRGBO(26, 176, 96, 1.0)
+                  //     : Colors.white,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // children: [
+                          //   Expanded(
+                          //     child: Container(
+                          //       height: 50,
+                          //       child: ListView(
+                          //         scrollDirection: Axis.horizontal,
+                          //         children: widget.moments!
+                          //             .map((moment) => createMomentIcon(moment))
+                          //             .toList(),
+                          //       ),
+                          //     ),
+                          //   )
+                          // ],
+                          children: widget.moments!
+                              .map((moment) => createMomentIcon(moment))
+                              .toList(),
                         ),
-                        Container(
-                          child: Text(
-                            getTimeStringFromMoment(widget.moment!.name),
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: widget.moment!.allMedicinesTaken
-                                  ? Colors.white
-                                  : Colors.black,
+                      ),
+                      ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Text(
+                                convertMomentEnumToString(selectedMoment.name),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  color: selectedMoment.allMedicinesTaken
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                    trailing: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.moment!.allMedicinesTaken
-                              ? widget.moment!.setAllMedcinesToTaken(false)
-                              : widget.moment!.setAllMedcinesToTaken(true);
-                        });
-                      },
-                      icon: widget.moment!.allMedicinesTaken
-                          ? Icon(
-                              Icons.check_box,
-                              color: Colors.white,
+                            Container(
+                              child: Text(
+                                getTimeStringFromMoment(selectedMoment.name),
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: selectedMoment.allMedicinesTaken
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
                             )
-                          : Icon(Icons.check_box_outline_blank),
-                    ),
+                          ],
+                        ),
+                        // trailing: IconButton(
+                        //   onPressed: () {
+                        //     setState(() {
+                        //       selectedMoment.allMedicinesTaken
+                        //           ? selectedMoment.setAllMedcinesToTaken(false)
+                        //           : selectedMoment.setAllMedcinesToTaken(true);
+                        //     });
+                        //   },
+                        //   icon: selectedMoment.allMedicinesTaken
+                        //       ? Icon(
+                        //           Icons.check_box,
+                        //           color: Colors.white,
+                        //         )
+                        //       : Icon(Icons.check_box_outline_blank),
+                        // ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              showMedicines
-                  ? Container(
-                      child: createMedicineView(),
-                    )
-                  : SizedBox(),
+              Container(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                ),
+                child: Divider(
+                  color: Colors.white,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  bottom: 20,
+                ),
+                child: createMedicineView(selectedMoment),
+              )
             ],
           ),
         ),
