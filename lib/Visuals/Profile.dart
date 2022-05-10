@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
+import 'package:prescribed/Utility/appManager.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -53,18 +55,27 @@ class _ProfilePageState extends State<ProfilePage>
       ),
       endDrawer: Drawer(
         elevation: 5,
-        child: ListView(
-          children: [
-            ListTile(
-              leading: Icon(
-                Icons.exit_to_app,
-              ),
-              title: Text(
-                "Sign out",
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-            )
-          ],
+        child: InkWell(
+          child: ListView(
+            children: [
+              ListTile(
+                leading: Icon(
+                  Icons.exit_to_app,
+                  color: Colors.blue,
+                ),
+                title: Text(
+                  "Sign out",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blue,
+                  ),
+                ),
+              )
+            ],
+          ),
+          onTap: () {
+            context.read<AppManager>().setUserSignedIn(false);
+          },
         ),
       ),
       body: Container(

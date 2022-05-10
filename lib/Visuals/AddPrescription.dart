@@ -64,7 +64,7 @@ class _AddPrescriptionPageState extends State<AddPrescriptionPage>
             image: Image.asset("Medicine.jpeg").image,
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black38,
+              Colors.black54,
               BlendMode.darken,
             ),
           ),

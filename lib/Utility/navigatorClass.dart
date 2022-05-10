@@ -2,26 +2,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prescribed/Utility/appManager.dart';
 import 'package:prescribed/Visuals/AddPrescription.dart';
+import 'package:prescribed/Visuals/IntroPage.dart';
 import 'package:prescribed/Visuals/Profile.dart';
 import 'package:prescribed/Visuals/Schedule.dart';
+import 'package:prescribed/Visuals/SignIn.dart';
 import 'package:provider/provider.dart';
+import 'package:onboarding/onboarding.dart';
 
 class NavigatorClass extends StatefulWidget {
   const NavigatorClass({Key? key}) : super(key: key);
 
   @override
-  State<NavigatorClass> createState() => _NavigatorClassState();
+  State<NavigatorClass> createState() => NavigatorClassState();
 }
 
-class _NavigatorClassState extends State<NavigatorClass> {
+class NavigatorClassState extends State<NavigatorClass> {
   bool userSignedIn = false;
   int _currentIndex = 0;
+  int onboardIndex = 0;
   PageController _pageController = PageController();
   List<Widget> _pages = [
     SchedulePage(),
     AddPrescriptionPage(),
     ProfilePage()
     //LibraryPage()
+  ];
+  final onboardingPages = [
+    PageModel(widget: IntroPage()),
+    PageModel(
+      widget: SignInPage(),
+    ),
   ];
 
   @override
@@ -83,185 +93,93 @@ class _NavigatorClassState extends State<NavigatorClass> {
             ),
           )
         : Scaffold(
-            body: Container(
-              // decoration: BoxDecoration(
-              //   image: DecorationImage(
-              //     image: Image.asset("Medicine.jpeg").image,
-              //     fit: BoxFit.cover,
-              //   ),
-              // ),
-              color: Colors.white,
-              child: ListView(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height * 0.35,
-                          bottom: 20,
-                        ),
-                        child: Image.asset(
-                          "IconNoBG.png",
-                          height: 35,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * .2,
-                          right: MediaQuery.of(context).size.width * .2,
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    child: Text(
-                                      "Email",
-                                      style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(),
-                                        prefixIcon: Icon(
-                                          CupertinoIcons.mail,
-                                          size: 15,
-                                          color: Colors.black,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        filled: true,
-                                        fillColor:
-                                            Color.fromRGBO(240, 240, 240, 1.0),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    child: Text(
-                                      "Password",
-                                      style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(),
-                                        prefixIcon: Icon(
-                                          Icons.lock,
-                                          size: 15,
-                                          color: Colors.black,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        filled: true,
-                                        fillColor:
-                                            Color.fromRGBO(240, 240, 240, 1.0),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.only(
-                                top: 20,
-                              ),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 10,
-                                  primary: Color.fromRGBO(26, 176, 96, 1.0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  context
-                                      .read<AppManager>()
-                                      .setUserSignedIn(true);
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(
-                                    10,
-                                  ),
-                                  child: Text(
-                                    "Login",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Signup",
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                      ),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Forgot Password?",
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 150, bottom: 50),
-                              child: Text(
-                                "Created by Daniel Dickson Dillimono",
-                                style: TextStyle(
-                                  color: Colors.grey[500],
-                                  fontWeight: FontWeight.w100,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+            body: Onboarding(
+              pages: onboardingPages,
+              onPageChange: (pageIndex) {
+                onboardIndex = pageIndex;
+              },
+              startPageIndex: 0,
+              footerBuilder: (context, dragDistance, pageslength, setIndex) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 0.0,
+                      color: background,
+                    ),
                   ),
-                ],
-              ),
+                  child: ColoredBox(
+                    color: background,
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomIndicator(
+                            netDragPercent: dragDistance,
+                            indicator: Indicator(
+                              indicatorDesign: IndicatorDesign.line(
+                                lineDesign: LineDesign(
+                                  lineType: DesignType.line_uniform,
+                                ),
+                              ),
+                            ),
+                            pagesLength: pageslength,
+                          ),
+                          onboardIndex == pageslength - 1
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        primary:
+                                            Color.fromRGBO(26, 176, 96, 1.0),
+                                      ),
+                                      onPressed: () {
+                                        setIndex(onboardIndex - 1);
+                                        onboardIndex -= 1;
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_back,
+                                      ),
+                                      label: Text(
+                                        "Back",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        primary:
+                                            Color.fromRGBO(26, 176, 96, 1.0),
+                                      ),
+                                      onPressed: () {
+                                        setIndex(onboardIndex + 1);
+                                        onboardIndex += 1;
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_forward,
+                                      ),
+                                      label: Text(
+                                        "Next",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           );
   }
