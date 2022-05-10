@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddPrescriptionPage extends StatefulWidget {
@@ -54,6 +55,10 @@ class _AddPrescriptionPageState extends State<AddPrescriptionPage>
         ],
       ),
       body: Container(
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+        ),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: Image.asset("Medicine.jpeg").image,
@@ -65,7 +70,113 @@ class _AddPrescriptionPageState extends State<AddPrescriptionPage>
           ),
           //backgroundBlendMode: BlendMode.
         ),
-        child: ListView(),
+        child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      "Prescription Name",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                          CupertinoIcons.tag,
+                          size: 15,
+                          color: Colors.black,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        filled: true,
+                        fillColor: Color.fromRGBO(240, 240, 240, 1.0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      "Prescription Description",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: TextFormField(
+                      minLines: 5,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                          CupertinoIcons.tag,
+                          size: 15,
+                          color: Colors.black,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        filled: true,
+                        fillColor: Color.fromRGBO(240, 240, 240, 1.0),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            primary: Color.fromRGBO(26, 176, 96, 1.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: Container(
+                            padding: EdgeInsets.all(
+                              10,
+                            ),
+                            child: Text(
+                              "Add",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

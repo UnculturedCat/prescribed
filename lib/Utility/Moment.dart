@@ -72,11 +72,12 @@ List<Moment> moments = [
         Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg")
       ]),
   Moment(
-      name: MomentName.Slapen,
-      date: DateTime.parse("2022-06-02"),
-      medicines: [
-        Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg"),
-      ]),
+    name: MomentName.Slapen,
+    date: DateTime.parse("2022-06-02"),
+    medicines: [
+      Medicine(name: "Melatonin", taken: false, dosage: "2 stuks, 40mg"),
+    ],
+  ),
   Moment(
       name: MomentName.Lunch,
       date: DateTime.parse("2022-06-03"),

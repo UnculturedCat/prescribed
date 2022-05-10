@@ -15,7 +15,7 @@ class _SchedulePageState extends State<SchedulePage>
     with AutomaticKeepAliveClientMixin {
   List<DateTime> days = [];
 
-  DateTime? selectedDay = DateTime.now();
+  DateTime? selectedDay = DateTime.parse("2022-05-07");
 
   @override
   void initState() {

@@ -148,7 +148,7 @@ class _MomentCardState extends State<MomentCard> {
                                   fontWeight: FontWeight.w600,
                                   fontSize: 20,
                                   color: selectedMoment.allMedicinesTaken
-                                      ? Colors.white
+                                      ? Color.fromRGBO(26, 176, 96, 1.0)
                                       : Colors.black,
                                 ),
                               ),
@@ -159,13 +159,19 @@ class _MomentCardState extends State<MomentCard> {
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: selectedMoment.allMedicinesTaken
-                                      ? Colors.white
+                                      ? Color.fromRGBO(26, 176, 96, 1.0)
                                       : Colors.black,
                                 ),
                               ),
                             )
                           ],
                         ),
+                        trailing: selectedMoment.allMedicinesTaken
+                            ? Icon(
+                                Icons.check_box,
+                                color: Colors.greenAccent,
+                              )
+                            : SizedBox(),
                         // trailing: IconButton(
                         //   onPressed: () {
                         //     setState(() {
